@@ -1,26 +1,37 @@
-# Debian/Ubuntu Setup
+## Debian/Ubuntu Setup
 
 Some records for software install or configure on debian stretch.
 
-* Software install
-  * general
-  * debootstrap
-  * desktop
-  * nfs, samba, avaiha
-  * dev
-  * 32bit dev
-  * AOSP dev
-* Network configure
-  * Static IP
-  * Set hostname
-  * PPPoE ipv6 dual stack
-* SSH server public key authentication configure
-* Change time zone
-* Samba configure
-* NFS configure
-* fixed user 'xxxx' not in the sudoers file
-* Cloudflare sub-domain IPv4/IPV6 address updater bash script
-* restore_rcs.sh: The /etc restore script
+  * [Software install](#software-install)
+		* [general](#general)
+		* [debootstrap](#debootstrap)
+		* [desktop](#desktop)
+		* [x11vnc](#x11vnc)
+		* [nfs, samba, avaiha](#nfs-samba-avaiha)
+		* [dev](#dev)
+		* [libdrm-dev](#libdrm-dev)
+		* [32bit dev](#32bit-dev)
+		* [AOSP dev](#aosp-dev)
+		* [SDL2 dev](#sdl2-dev)
+		* [SDL2 runtime](#sdl2-runtime)
+		* [ffmpeg dev](#ffmpeg-dev)
+		* [OpenGL Headers](#opengl-headers)
+		* [wpa_supplicant-2.7 building](#wpa_supplicant-27-building)
+  * [Network configure](#network-configure)
+		* [Static IP](#static-ip)
+		* [Set hostname](#set-hostname)
+		* [PPPoE ipv6 dual stack](#pppoe-ipv6-dual-stack)
+  * [SSH server public key authentication configure](#ssh-server-public-key-authentication-configure)
+  * [SSHFS](#sshfs)
+  * [Change time zone to UTC](#change-time-zone-to-utc)
+  * [Samba configure](#samba-configure)
+  * [NFS configure (May be use SSHFS instead)](#nfs-configure-may-be-use-sshfs-instead)
+  * [fixed user 'xxxx' not in the sudoers file](#fixed-user-xxxx-not-in-the-sudoers-file)
+  * [Cloudflare sub-domain IPv4/IPV6 address updater bash script](#cloudflare-sub-domain-ipv4ipv6-address-updater-bash-script)
+  * [restore_rcs.sh: The /etc restore script](#restore_rcssh-the-etc-restore-script)
+  * [coturn docker image bring up command](#coturn-docker-image-bring-up-command)
+
+
 
 ## Software install
 
@@ -479,3 +490,35 @@ root:
 This script could restore any file from `/opt/*` to `/*` when I have a fresh installed linux distribution just via compare the `md5sum` and lastest modified timestamp. The script will not cover any file if the `/*` lastest modified timestamp is newer than `/opt/rcs/*` even the md5sum is not same.
 
 Due to the most of file stored from `/opt/rcs/*` is text, so the `/opt/rcs` could easily backup by git or rsync. 
+
+
+---------------------------------
+
+## coturn docker image bring up command 
+
+- my bring up command for `instrumentisto/coturn:4.5`
+	```bash
+	sudo docker run -itd --privileged=true --net=host \
+	--name=coturn instrumentisto/coturn:4.5 \
+	--user=user:pass \
+	--lt-cred-mech \
+	--realm=anydomain.com \
+	--listening-ip='$(detect-external-ip)' \
+	--external-ip='$(detect-external-ip)' \
+	--relay-ip='$(detect-external-ip)'
+	```
+- for docker-compose.yml
+	```bash
+	version: "3.8"
+	services:
+	  coturn:
+		image: instrumentisto/coturn:4.5
+		privileged: true
+		network_mode: "host"
+		restart: always
+		volumes:
+		  - /var:/var
+		  - /tmp/turnserver.log:/tmp/turnserver.log
+		  - /etc/turnserver.conf.fake:/etc/turnserver.conf
+		command: docker-entrypoint.sh --user=user:pass --lt-cred-mech --realm=anydomain.com --listening-ip='$$(detect-external-ip)' --external-ip='$$(detect-external-ip)' --relay-ip='$$(detect-external-ip)'
+	```
