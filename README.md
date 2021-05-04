@@ -2,25 +2,24 @@
 
 Some records for software install or configure on debian stretch.
 
-  * [Software install](#software-install)
-		* [general](#general)
-		* [debootstrap](#debootstrap)
-		* [desktop](#desktop)
-		* [x11vnc](#x11vnc)
-		* [nfs, samba, avaiha](#nfs-samba-avaiha)
-		* [dev](#dev)
-		* [libdrm-dev](#libdrm-dev)
-		* [32bit dev](#32bit-dev)
-		* [AOSP dev](#aosp-dev)
-		* [SDL2 dev](#sdl2-dev)
-		* [SDL2 runtime](#sdl2-runtime)
-		* [ffmpeg dev](#ffmpeg-dev)
-		* [OpenGL Headers](#opengl-headers)
-		* [wpa_supplicant-2.7 building](#wpa_supplicant-27-building)
-  * [Network configure](#network-configure)
-		* [Static IP](#static-ip)
-		* [Set hostname](#set-hostname)
-		* [PPPoE ipv6 dual stack](#pppoe-ipv6-dual-stack)
+  * [Debian/Ubuntu Setup](#debianubuntu-setup)
+  * [general](#general)
+  * [debootstrap](#debootstrap)
+  * [desktop](#desktop)
+  * [x11vnc](#x11vnc)
+  * [nfs, samba, avaiha](#nfs-samba-avaiha)
+  * [dev](#dev)
+  * [libdrm-dev](#libdrm-dev)
+  * [32bit dev](#32bit-dev)
+  * [AOSP dev](#aosp-dev)
+  * [SDL2 dev](#sdl2-dev)
+  * [SDL2 runtime](#sdl2-runtime)
+  * [ffmpeg dev](#ffmpeg-dev)
+  * [OpenGL Headers](#opengl-headers)
+  * [wpa_supplicant-2.7 building](#wpa_supplicant-27-building)
+  * [Static IP](#static-ip)
+  * [Set hostname](#set-hostname)
+  * [PPPoE ipv6 dual stack](#pppoe-ipv6-dual-stack)
   * [SSH server public key authentication configure](#ssh-server-public-key-authentication-configure)
   * [SSHFS](#sshfs)
   * [Change time zone to UTC](#change-time-zone-to-utc)
@@ -32,30 +31,35 @@ Some records for software install or configure on debian stretch.
   * [coturn docker image bring up command](#coturn-docker-image-bring-up-command)
 
 
+---------------------------------
 
-## Software install
-
-#### general
+## general
 
 ```
 sudo apt-get install nload tmux vim sudo wget curl ca-certificates xz-utils net-tools --no-install-recommends
 ```
 
-#### debootstrap 
+---------------------------------
+
+## debootstrap 
 
 ```
 apt-get install  qemu-utils qemu qemu-user-static binfmt-support fakechroot debootstrap gperf help2man --no-install-recommends
 ```
 
-And then you could got `qemu-aarch64-static`, `qemu-arm-static`, `qemu-armeb-static`.
+And then you could got `qemu-aarch64-static`, `qemu-arm-static`, `qemu-armeb-static`
 
-#### desktop
+---------------------------------
+
+## desktop
 
 ```
 sudo apt-get install ntfs-3g freerdp aptitude vim-gtk3 firmware-misc-nonfree vnc4server lm-sensors linux-headers-4.x.x.x-amd64 --no-install-recommends
 ```
 
-#### x11vnc
+---------------------------------
+
+## x11vnc
 
 ```
 sudo apt-get install x11vnc
@@ -79,8 +83,9 @@ Use VNC Viewer for client connection
 IP:5900
 ```
  
+---------------------------------
 
-#### nfs, samba, avaiha
+## nfs, samba, avaiha
 
 ```
 sudo apt-get install nfs-common nfs-kernel-server portmap cifs-utils avahi-daemon samba --no-install-recommends
@@ -113,51 +118,66 @@ sudo systemctl reart avahi-daemon
 
 and then you can `ping debser.local` from windows after you installed the ITunes(mDNS).
 
+---------------------------------
 
-#### dev
+## dev
 
 ```
 sudo apt-get install build-essential fakeroot automake flex texinfo autoconf bison gawk libtool libtool-bin libncurses5-dev git yasm --no-install-recommends
 ```
 
-#### libdrm-dev
+---------------------------------
+
+## libdrm-dev
 
 ```
 sudo apt install libgl1-mesa-dev libdrm-dev libegl1-mesa-dev
 ```
 
-#### 32bit dev
+---------------------------------
+
+## 32bit dev
 
 ```
 sudo apt-get install lib32z1 gcc-multilib rpm lib32stdc++6 lib32ncurses5 --no-install-recommends
 ```
 
-#### AOSP dev
+---------------------------------
+
+## AOSP dev
 
 ```
 sudo apt-get install git-core gnupg flex bison gperf build-essential zip curl zlib1g-dev gcc-multilib g++-multilib libc6-dev-i386 lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z-dev libgl1-mesa-dev libxml2-utils xsltproc unzip openjdk-8-jdk
 ```
 
-#### SDL2 dev
+---------------------------------
+
+## SDL2 dev
 
 ```
 sudo apt-get install libsdl2-dev libsdl2-gfx-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-net-dev libsdl2-ttf-dev libcurl4-openssl-dev libjansson-dev libyaml-dev
 ```
 
+---------------------------------
 
-#### SDL2 runtime
+
+## SDL2 runtime
 
 ```
 sudo apt-get install libsdl2-2.0 libsdl2-gfx-1.0 libsdl2-image-2.0 libsdl2-mixer-2.0 libsdl2-net-2.0 libsdl2-ttf-2.0 libcurl4 libjansson4 libyaml-0-2
 ```
 
-#### ffmpeg dev
+---------------------------------
+
+## ffmpeg dev
 
 ```
 sudo apt-get install libavcodec-dev libavformat-dev libavdevice-dev libavfilter-dev libavutil-dev libswresample-dev libswscale-dev
 ```
 
-#### OpenGL Headers
+---------------------------------
+
+## OpenGL Headers
 
 Install these things before install nVidia GPU driver.
 
@@ -165,7 +185,9 @@ Install these things before install nVidia GPU driver.
 sudo apt-get install libgl1-mesa-dev libgles2-mesa-dev 
 ```
 
-#### wpa_supplicant-2.7 building
+---------------------------------
+
+## wpa_supplicant-2.7 building
 
 ```
 sudo apt-get install dbus libdbus-1-3 libxml2-dev libssl-dev
@@ -183,9 +205,9 @@ sudo make LIBDIR=/usr/lib install
 
 The `/usr/lib/libwpa_client.so` and `/usr/local/include/wpa_ctrl.h` will installed.
 
-## Network configure
+---------------------------------
 
-#### Static IP
+## Static IP
 
 1. edit `/etc/network/interfaces` and replace the followings line from
 
@@ -207,14 +229,18 @@ The `/usr/lib/libwpa_client.so` and `/usr/local/include/wpa_ctrl.h` will install
 
 1. `reboot`
 
-#### Set hostname
+---------------------------------
+
+## Set hostname
 
 1. chaneg `deb9ser` as you want.
     ```
     sudo hostnamectl set-hostname deb9ser
     ```
 
-#### PPPoE ipv6 dual stack
+---------------------------------
+
+## PPPoE ipv6 dual stack
 
 1. Make sure the followings line has been comments in `/etc/sysctl.conf`
     
@@ -291,6 +317,8 @@ The `/usr/lib/libwpa_client.so` and `/usr/local/include/wpa_ctrl.h` will install
     net.ipv6.conf.enp0s31f6.disable_ipv6 = 1
     ```
 
+---------------------------------
+
 ## SSH server public key authentication configure
 
 1. Client: Generate the RSA public key, private key pair in the client side
@@ -329,6 +357,8 @@ The `/usr/lib/libwpa_client.so` and `/usr/local/include/wpa_ctrl.h` will install
     <https://devops.profitbricks.com/tutorials/use-ssh-keys-with-putty-on-windows/>
     
     
+---------------------------------
+	
 ## SSHFS
 
 If the ssh server is ready, then no need to do anything from server side. The followings command is for client side.
@@ -358,10 +388,13 @@ fusermount -u /opt/workspace_vm
 If this way can work, then totally can instead of NFS Sucks. 
  <https://www.kernel.org/doc/ols/2006/ols2006v2-pages-59-72.pdf>
     
+---------------------------------
 
 ## Change time zone to UTC
 
     sudo dpkg-reconfigure tzdata
+	
+---------------------------------
 
 ## Samba configure
 
@@ -424,6 +457,9 @@ If this way can work, then totally can instead of NFS Sucks.
     systemctl enable smbd
     ```
     
+	
+---------------------------------
+
 ## NFS configure (May be use SSHFS instead)
 
 1. Sharing `/opt`. Edit `/etc/exports` to 
@@ -444,7 +480,7 @@ If this way can work, then totally can instead of NFS Sucks.
     systemctl enable nfs-kernel-server
     ```
     
-
+---------------------------------
 
 ## fixed user 'xxxx' not in the sudoers file
 
@@ -460,6 +496,8 @@ If this way can work, then totally can instead of NFS Sucks.
     username	ALL=(ALL) ALL
     ```
 
+---------------------------------
+
 ## Cloudflare sub-domain IPv4/IPV6 address updater bash script
 
 The script provide a way to be something like Dynamic DNS. 
@@ -468,6 +506,8 @@ The script provide a way to be something like Dynamic DNS.
 1. Modify the `AUTH_EMAIL`, `AUTH_KEY`, `ZONE_NAME`, `RECORD_NAME`, `RECORD_NAME6`, `IP_IS_NOT` as you want
 1. Move `cloudflare-v4v6_dns-updater` to `/etc/ppp/ip-up.d` 
 1. The script could be executed after ppp0 was bring up
+
+---------------------------------
 
 ## restore_rcs.sh: The /etc restore script
 
