@@ -634,6 +634,8 @@ Due to the most of file stored from `/opt/rcs/*` is text, so the `/opt/rcs` coul
 	- `conan search "*" -r all`
 - Export package to local cache
 	- `conan export . user/channel`
+- Export prebuilt package to local cache (no need to specify `--build=zlib` on install command)
+	- `conan export-pkg . user/channel`
 - Install and build package (if package not exist from local cache then will download package from remote conan server)
 	- `conan install zlib/1.2.9@user/channel --build=zlib `
 - Install and build package by specified conanfile.txt and generate `conanbuildinfo.cmake`, `conanbuildinfo.mak`
@@ -651,7 +653,5 @@ Due to the most of file stored from `/opt/rcs/*` is text, so the `/opt/rcs` coul
 	- `conan install zlib3/1.2.9@user1/channel1 -r conan -g make -g cmake`
 - Install and build package with reversion
 	- `conan install zlib3/1.2.9@user1/channel1#reversion_hash`
-- Export prebuilt package to local cache (no need to specify `--build=zlib` on install command)
-	- `conan export-pkg . user/channel`
 - Upload package from local cache to remote conan server
 	- `conan upload zlib3/1.2.9@user/channel --all -r=conan`
