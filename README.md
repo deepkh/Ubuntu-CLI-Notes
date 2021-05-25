@@ -621,9 +621,9 @@ Due to the most of file stored from `/opt/rcs/*` is text, so the `/opt/rcs` coul
 - login jfrog by normal user -> deepkh
 	- Click the top-right corner button of `SetMe up`
 		- for `conan` virtual repo (this repo can read by anonymous, and can read/deploy/write by user deepkh)
-			- conan remote add conan https://jfrog_ip_address/artifactory/api/conan/conan False -f
+			- `conan remote add conan https://jfrog_ip_address/artifactory/api/conan/conan False -f`
 			- add deploy/write user (Can ignore this step if no need for upload)
-				- conan user -p AP5moD1K9R3zfmN2jur6ufSK2oX -r conan deepkh
+				- `conan user -p hash_code_prompt_from_jfrogs_web_ui -r conan deepkh`
 
 ---------------------------------
 
