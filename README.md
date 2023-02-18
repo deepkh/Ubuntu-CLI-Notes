@@ -271,6 +271,7 @@ PermitRootLogin without-password
 AuthorizedKeysFile      .ssh/authorized_keys
 ChallengeResponseAuthentication no
 PasswordAuthentication no
+PubkeyAcceptedKeyTypes +ssh-rsa
 ```
     
 and
