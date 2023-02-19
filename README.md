@@ -1269,9 +1269,8 @@ ipsec[5124]: 11[IKE] loading EAP_MSCHAPV2 method failed
 那麼請記得安裝
 
 ```bash
-sudo apt-get install libstrongswan-extra-plugins libstrongswan-standard-plugins libcharon-extra-plugins 
+sudo apt-get install libstrongswan-extra-plugins libstrongswan-standard-plugins libcharon-extra-plugins libcharon-extauth-plugins
 ```
-
 那麼確認 eap-mschapv2 已被 ipsec 載入 `ipsec statusall | grep eap-mschapv2`
 
 ```bash
