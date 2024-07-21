@@ -1163,10 +1163,8 @@ conn ikev2-vpn
     keyexchange=ikev2
     fragmentation=yes
     forceencaps=yes
-    #ike=aes256-sha1-modp1024,3des-sha1-modp1024!
-    #esp=aes256-sha1,3des-sha1!
-    ike=aes256-sha1-modp1024,aes128-sha1-modp1024,3des-sha1-modp1024! # Win7 is aes256, sha-1, modp1024; iOS is aes256, sha-256, modp1024; OS X is 3DES, sha-1, modp1024
-    esp=aes256-sha256,aes256-sha1,3des-sha1!                          # Win 7 is aes256-sha1, iOS is aes256-sha256, OS X is 3des-shal1
+    ike=aes256-sha2_256-modp2048,aes256-sha1-modp1024,aes128-sha1-modp1024,3des-sha1-modp1024! # Win7 is aes256, sha-1, modp1024; iOS is aes256, sha-256, modp1024; OS X is 3DES, sha-1, modp1024
+    esp=aes256-sha2_256,aes256-sha256,aes256-sha1,3des-sha1!                          # Win 7 is aes256-sha1, iOS is aes256-sha256, OS X is 3des-shal1
     dpdaction=clear
     dpddelay=300s
     rekey=no
