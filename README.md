@@ -1,67 +1,4 @@
-# Table of content
- 
-   * [Ubuntu CLI notes](#ubuntu-cli-notes)
-      * [Headless](#headless)
-         * [General](#general)
-         * [debootstrap](#debootstrap)
-         * [nfs, samba, avaiha](#nfs-samba-avaiha)
-         * [Static IP](#static-ip)
-         * [Hostname](#hostname)
-         * [Hinet VDSL PPPoE with ipv6 dual stack](#hinet-vdsl-pppoe-with-ipv6-dual-stack)
-         * [SSH server public key authentication configure](#ssh-server-public-key-authentication-configure)
-         * [SSHFS](#sshfs)
-         * [Change time zone to UTC](#change-time-zone-to-utc)
-         * [Samba Configure](#samba-configure)
-         * [NFS Configure](#nfs-configure)
-         * [Fix user 'xxxx' not in the sudoers file](#fix-user-xxxx-not-in-the-sudoers-file)
-      * [Development](#development)
-         * [General](#general-1)
-         * [libdrm-dev](#libdrm-dev)
-         * [32bit dev](#32bit-dev)
-         * [AOSP dev](#aosp-dev)
-         * [SDL2 dev](#sdl2-dev)
-         * [SDL2 runtime](#sdl2-runtime)
-         * [ffmpeg dev](#ffmpeg-dev)
-         * [OpenGL Headers](#opengl-headers)
-         * [wpa_supplicant-2.7 building](#wpa_supplicant-27-building)
-      * [Desktop](#desktop)
-         * [general](#general-2)
-         * [x11vnc](#x11vnc)
-      * [Docker](#docker)
-         * [General](#general-3)
-         * [Basic CLI](#basic-cli)
-         * [iptables rules for DOCKER-USER chain](#iptables-rules-for-docker-user-chain)
-         * [Docker Compose](#docker-compose)
-      * [Gitlab on Docker Engine](#gitlab-on-docker-engine)
-         * [General](#general-4)
-         * [Enter the gitlab conatiner and modify the custom configure](#enter-the-gitlab-conatiner-and-modify-the-custom-configure)
-         * [Configure for standalone gitlab server](#configure-for-standalone-gitlab-server)
-         * [Configure for gitlab server behind the reverse proxy](#configure-for-gitlab-server-behind-the-reverse-proxy)
-         * [References](#references)
-      * [Example of docker-compose.yml](#example-of-docker-composeyml)
-      * [Coturn TURN Server docker image](#coturn-turn-server-docker-image)
-      * [Conan C/C++ package manager](#conan-cc-package-manager)
-         * [jfrog server setup](#jfrog-server-setup)
-         * [client account setup](#client-account-setup)
-         * [Basic CLI](#basic-cli-1)
-      * [為移動而生的 VPN =&gt; iKEv2](#\xE7\x82\xBA\xE7\xA7\xBB\xE5\x8B\x95\xE8\x80\x8C\xE7\x94\x9F\xE7\x9A\x84-vpn--ikev2)
-         * [Strongswan + iKEv2 + EAP 一鍵安裝腳本](#strongswan--ikev2--eap-\xE4\xB8\x80\xE9\x8D\xB5\xE5\xAE\x89\xE8\xA3\x9D\xE8\x85\xB3\xE6\x9C\xAC)
-            * [StrongSwan 與其相依軟件](#strongswan-\xE8\x88\x87\xE5\x85\xB6\xE7\x9B\xB8\xE4\xBE\x9D\xE8\xBB\x9F\xE4\xBB\xB6)
-            * [RootCA X509 憑證](#rootca-x509-\xE6\x86\x91\xE8\xAD\x89)
-            * [iKEv2 VPN Server X509 憑證](#ikev2-vpn-server-x509-\xE6\x86\x91\xE8\xAD\x89)
-            * [設定 /etc/ipsec.conf](#\xE8\xA8\xAD\xE5\xAE\x9A-etcipsecconf)
-            * [設定 /etc/ipsec.secrets](#\xE8\xA8\xAD\xE5\xAE\x9A-etcipsecsecrets)
-            * [設定 設定 /etc/strongswan.conf](#\xE8\xA8\xAD\xE5\xAE\x9A-\xE8\xA8\xAD\xE5\xAE\x9A-etcstrongswanconf)
-            * [設定 /etc/network/if-up.d/iptables](#\xE8\xA8\xAD\xE5\xAE\x9A-etcnetworkif-updiptables)
-            * [loading EAP_MSCHAPV2 method failed](#loading-eap_mschapv2-method-failed)
-         * [iOS 14 iKEv2 客戶端設定](#ios-14-ikev2-\xE5\xAE\xA2\xE6\x88\xB6\xE7\xAB\xAF\xE8\xA8\xAD\xE5\xAE\x9A)
-            * [RootCA X509 憑證](#rootca-x509-\xE6\x86\x91\xE8\xAD\x89-1)
-            * [設定 iKEv2 客戶端](#\xE8\xA8\xAD\xE5\xAE\x9A-ikev2-\xE5\xAE\xA2\xE6\x88\xB6\xE7\xAB\xAF)
-         * [Windows 10 iKEv2 客戶端設定](#windows-10-ikev2-\xE5\xAE\xA2\xE6\x88\xB6\xE7\xAB\xAF\xE8\xA8\xAD\xE5\xAE\x9A)
-            * [增加 ikev2_rootca.crt 憑證](#\xE5\xA2\x9E\xE5\x8A\xA0-ikev2_rootcacrt-\xE6\x86\x91\xE8\xAD\x89)
-            * [設定 iKEv2 連線](#\xE8\xA8\xAD\xE5\xAE\x9A-ikev2-\xE9\x80\xA3\xE7\xB7\x9A)
-            * [增加 10.10.10.0 到路由表](#\xE5\xA2\x9E\xE5\x8A\xA0-1010100-\xE5\x88\xB0\xE8\xB7\xAF\xE7\x94\xB1\xE8\xA1\xA8)
-         * [參考網頁](#\xE5\x8F\x83\xE8\x80\x83\xE7\xB6\xB2\xE9\xA0\x81)
+
  
 # Ubuntu CLI notes
 ## Headless
@@ -1342,6 +1279,130 @@ Win10 原生已支援 iKEv2，僅需按下列步驟進行。
 ```
 route -p ADD 10.10.10.0 MASK 255.255.255.0 192.168.1.2
 ```
+
+---------------------------------
+
+### iKEv2 strongswan client setup from console on Debian Bookworm for Raspberry Pi 5
+
+The steps are supposed to work on Ubuntu 23.04 and Ubuntu 24.04 on x86_64.
+
+#### Install necessary packages
+
+```
+sudo apt-get install strongswan strongswan-swanctl libcharon-extra-plugins strongswan-pki iptables-persistent libstrongswan-extra-plugins libstrongswan-standard-plugins libcharon-extauth-plugins  resolvconf --no-install-recommends
+```
+
+#### edit bypass-lan
+
+
+```
+sudo vim.tiny /etc/strongswan.d/charon/bypass-lan.conf
+interfaces_use = wlan0
+load = yes
+```
+
+#### edit swanctl.conf
+
+```
+connections {
+   passthrough-subnet {
+       remote_addrs  = 127.0.0.1
+       children {
+           passthrough-subnet-1 {
+               local_ts = 192.168.4.0/24
+               remote_ts = 192.168.4.0/24
+               mode = pass
+               start_action = trap
+           }
+
+
+       }
+   }
+}
+```
+
+
+#### edit ipsec.conf
+
+```
+sudo vim.tiny /etc/ipsec.conf
+
+conn vpnserver
+                keyexchange=ikev2
+                ike=aes-sha1-modp1024!
+                esp=aes128gcm16-modp1024
+                #dpdaction=hold
+                #dpddelay=60s
+                dpdaction=restart
+                dpddelay=300s
+                dpdtimeout=150s
+                leftid=YOUR_USERNAME
+                leftauth=eap-mschapv2
+#                left=%defaultroute
+                leftsourceip=%config
+                right=vpnserver.domain.com
+                rightid=vpnserver.domain.com
+                rightauth=pubkey
+                rightauth=pubkey
+                rightsubnet=0.0.0.0/0
+                #type=tunnel
+                eap_identity=%identity
+                auto=start
+```
+
+
+#### edit ipsec.secrets
+
+```
+sudo vim.tiny /etc/ipsec.conf
+YOUR_USERNAME : EAP "YOUR_PASSWORD"
+```
+
+#### edit constraints.conf
+
+Change load = yes to load = no To save the file you need to press Ctrl X key combination, then Y key and then Enter.
+
+```
+sudo vim.tiny /etc/strongswan.d/charon/constraints.conf
+```
+
+
+#### edit vpnserver.crt
+
+```
+sudo vim.tiny /etc/ipsec.d/cacerts/vpnserver.crt
+```
+
+#### start connect to vpn server
+
+```
+sudo ipsec up vpnserver
+```
+
+#### stop connect to vpn server
+
+```
+sudo ipsec down vpnserver
+```
+
+#### Satus of vpnserver connection
+
+```
+sudo ipsec status
+```
+
+#### enable service
+
+```
+sudo systemctl enable strongswan-starter
+sudo systemctl enable ipsec
+```
+
+#### References
+
+* [how to connect to a vpn site using console only](https://askubuntu.com/questions/1198871/how-to-connect-to-a-vpn-site-using-console-only)
+* [how-can-i-make-strongswan-clients-auto-reconnect-when-server-is-down](https://serverfault.com/questions/970010/how-can-i-make-strongswan-clients-auto-reconnect-when-server-is-down)
+
 
 ---------------------------------
 
